@@ -1,0 +1,20 @@
+[
+  {
+    "title": "AWS Certified Cloud Practitioner",
+    "issuer": "Amazon Web Services",
+    "date": "August 2025",
+    "icon": "aws"
+  },
+  {
+    "title": "Prompt Engineering Knowledge Universe",
+    "issuer": "Tayana Academy",
+    "date": "February 2026",
+    "icon": "ai"
+  },
+  {
+    "title": "Wipro TalentNext – .NET Full Stack Developer Certification",
+    "issuer": "Wipro Limited",
+    "date": "October 2025",
+    "icon": "dotnet"
+  }
+]
