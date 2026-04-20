@@ -1,0 +1,200 @@
+[
+  {
+    "id": "neurolearn",
+    "title": "NeuroLearn",
+    "priority": 1,
+    "highlight": true,
+    "role": "Full Stack Engineer (Backend-Focused)",
+    "impact": "Built a personalized learning system using prompt pipelines and structured input/output parsing to dynamically adapt content relevance.",
+    "description": "Designed a scalable Django backend and built a React-based frontend dashboard to visualize personalized study plans. Integrated Gemini LLM APIs via OpenRouter. Implemented performance-based feedback loops and async task processing.",
+    "tags": [
+      "Django",
+      "React",
+      "OpenRouter AI",
+      "PostgreSQL",
+      "Celery"
+    ],
+    "github_url": "https://github.com/shashanknamdeo/Projects/tree/main/NeuroLearn",
+    "architecture_highlights": [
+      "API-driven frontend consuming versioned DRF endpoints",
+      "Frontend-backend contract with structured response schemas",
+      "Asynchronous Prompt Processing (Celery + Redis)",
+      "State-machine driven study session persistence"
+    ],
+    "technical_challenge": {
+      "problem": "High latency in LLM responses impacted user session flow.",
+      "mitigation": "Addressed using Celery-based async task queues and response caching."
+    },
+    "design_decisions": [
+      "Celery over sync processing → avoids blocking during LLM calls",
+      "Database persistence over in-memory state → ensures recovery on network drops"
+    ],
+    "proof": {
+      "api_sample": {
+        "endpoint": "POST /api/v1/learning/session",
+        "request": "{ \"topic\": \"Photosynthesis\" }",
+        "response": "{ \"explanation\": \"...\", \"quiz\": [...] }"
+      },
+      "db_schema": "StudySession(id, user, topic, current_mastery)",
+      "architecture": "User → Django → Gemini → Context Manager → Postgres"
+    }
+  },
+  {
+    "id": "hireiq",
+    "title": "HireIQ",
+    "priority": 1,
+    "highlight": true,
+    "role": "Backend Engineer",
+    "impact": "Designed a distributed scraping and analysis pipeline reducing manual job discovery effort by 80%.",
+    "description": "Built a multi-worker Django-Celery architecture for automated job discovery. Leveraged structured prompt pipelines for JD-Resume matching and automated apply-flow detection using Selenium.",
+    "tags": [
+      "Python",
+      "Django",
+      "Selenium",
+      "Gemini",
+      "AWS EB"
+    ],
+    "github_url": "https://github.com/shashanknamdeo/Projects/tree/main/HireIQ",
+    "architecture_highlights": [
+      "API-driven UI with loading states, error handling, and retry logic",
+      "Distributed Scraper Architecture with fault isolation",
+      "Structured LLM scoring engine for JD matching",
+      "Multi-tenant application tracking data model"
+    ],
+    "technical_challenge": {
+      "problem": "Evolving anti-bot protections on target job portals caused frequent scraper failures.",
+      "mitigation": "Addressed using adaptive scraping strategies with custom retry logic and rotation tuning."
+    },
+    "design_decisions": [
+      "Worker-per-source strategy → prevents a single target failure from halting the entire pipeline",
+      "Exponential Backoff → maintains target site reliability and prevents aggressive rate-limiting"
+    ],
+    "proof": {
+      "api_sample": {
+        "endpoint": "POST /api/v1/jobs/analyze",
+        "request": "{ \"job_description\": \"...\" }",
+        "response": "{ \"score\": 87, \"matches\": [\"Django\", \"RDS\"] }"
+      },
+      "db_schema": "Jobs(id, title, desc_vector, status)",
+      "architecture": "User → Django → Celery → Gemini → RDS"
+    }
+  },
+  {
+    "id": "intellitrade",
+    "title": "IntelliTrade",
+    "priority": 1,
+    "highlight": true,
+    "role": "Backend Engineer",
+    "impact": "Designed a backend optimized for low-latency trade signal processing and automated multi-asset execution.",
+    "description": "Built a modular Django backend integrating brokerage APIs (Kotak, Zerodha) for market data ingestion and trade execution. Optimized strategy execution pipelines for multi-asset trading with modular isolation.",
+    "tags": [
+      "Python",
+      "Django",
+      "Broker APIs",
+      "AWS",
+      "Redis"
+    ],
+    "github_url": "https://github.com/shashanknamdeo/Projects/tree/main/IntelliTrade",
+    "architecture_highlights": [
+      "Mutual TLS & API Key Auth for secure brokerage integration",
+      "Endpoints optimized for low-latency trade signals",
+      "Structured audit logging for full trade traceability",
+      "Event-driven market data ingestion pipeline"
+    ],
+    "technical_challenge": {
+      "problem": "Processing high-frequency real-time market data without bottlenecking strategy logic.",
+      "mitigation": "Addressed using a decoupled ingestion-execution pipeline and multi-asset strategy isolator."
+    },
+    "design_decisions": [
+      "Event-driven over linear architecture → ensures trade strategy doesn't block ingestion flow",
+      "Modular strategy isolation → ensures failure in one asset class doesn't impact overall stability"
+    ],
+    "proof": {
+      "api_sample": {
+        "endpoint": "GET /api/v1/market/signals?symbol=BTC",
+        "request": "",
+        "response": "{ \"signal\": \"BUY\", \"confidence\": 0.92 }"
+      },
+      "db_schema": "Trades(timestamp, asset, entry_price, status)",
+      "architecture": "Exchange → WebSocket → Django Broker → AWS RDS"
+    }
+  },
+  {
+    "id": "snk",
+    "title": "Snk",
+    "priority": 2,
+    "highlight": false,
+    "role": "Software Engineer (Mobile & Cloud Systems)",
+    "impact": "Ensures high reliability in cross-device synchronization using manifest-based verification.",
+    "description": "Designed a secure file synchronization engine with manifest-based diffing. Built a mobile-first storage system leveraging AWS S3 and Cognito for backups and parity verification.",
+    "tags": [
+      "React Native",
+      "AWS Cognito",
+      "AWS S3",
+      "TypeScript"
+    ],
+    "github_url": "https://github.com/shashanknamdeo/Projects/tree/main/Snk",
+    "architecture_highlights": [
+      "Manifest Sync Engine with MD5 integrity checks",
+      "AWS Cognito User Pool for secure identity management",
+      "S3 Multipart upload integration for reliability",
+      "Local-first architecture for offline-safe syncing"
+    ],
+    "technical_challenge": {
+      "problem": "Handling large-file synchronization over unstable mobile network connections.",
+      "mitigation": "Addressed using multipart upload resumes and manifest-based diffing."
+    },
+    "design_decisions": [
+      "Manifest-based diffing over full comparison → significantly reduces mobile bandwidth usage",
+      "Client-side MD5 hashing → ensures cloud-to-device data parity verification"
+    ],
+    "proof": {
+      "api_sample": {
+        "endpoint": "POST /api/v1/sync/manifest",
+        "request": "{ \"manifest\": { \"file1.txt\": \"md5\" } }",
+        "response": "{ \"sync_required\": [\"file1.txt\"] }"
+      },
+      "db_schema": "SyncManifest(file_path, hash, modified)",
+      "architecture": "Mobile → Manifest Engine → S3 Cloud"
+    }
+  },
+  {
+    "id": "gossipy",
+    "title": "Gossipy",
+    "priority": 2,
+    "highlight": false,
+    "role": "Software Engineer (Mobile AI Systems)",
+    "impact": "Built an optimized pipeline that synchronizes audio chunks with LLM responses for natural interactions.",
+    "description": "Designed a voice-first chat app leveraging AWS speech services. Built an optimized pipeline including prompt pipelines that synchronizes audio chunks with LLM responses for natural interactions.",
+    "tags": [
+      "React Native",
+      "AWS Transcribe",
+      "Amazon Polly",
+      "Gemini"
+    ],
+    "github_url": "https://github.com/shashanknamdeo/Projects/tree/main/Gossipy",
+    "architecture_highlights": [
+      "Real-time pipeline: Transcribe → Gemini → Polly",
+      "Bi-directional AWS connectivity for STT/TTS",
+      "Stateful chat context management",
+      "Optimized audio chunking feedback logic"
+    ],
+    "technical_challenge": {
+      "problem": "Ambient noise and network latency caused inaccurate STT and sluggish feedback.",
+      "mitigation": "Used AWS Transcribe over client-side libraries to improve accuracy in noisy environments."
+    },
+    "design_decisions": [
+      "AWS Transcribe over local libs → improved accuracy in noisy environments",
+      "Polly Neural voices over standard → delivered a natural and humane feedback experience"
+    ],
+    "proof": {
+      "api_sample": {
+        "endpoint": "POST /api/v1/voice/conversation",
+        "request": "{ \"audio_id\": \"chunk\" }",
+        "response": "{ \"text\": \"Hello!\", \"audio_url\": \"s3://...\" }"
+      },
+      "db_schema": "Conversations(id, user, timestamp)",
+      "architecture": "Mobile → Transcribe → Gemini → Polly → Mobile"
+    }
+  }
+]
